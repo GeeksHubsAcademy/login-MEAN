@@ -29,7 +29,7 @@ const UserController = {
             if(!isMatch){
                return res.status(400).send({message:'Wrong credentials'});
             }
-            const token = jwt.sign({"_id":"5e9ec482ebead138a00b8d32"}, 'mimamaMeMima' , {expiresIn:'2w'} );
+            const token = jwt.sign({_id:user._id}, 'mimamaMeMima' , {expiresIn:'2w'} );
             if(user.tokens.length>4) user.tokens.shift();//si ya hay 5 tokens eliminamos el más antiguo
             user.tokens.push(token);//añadimos el token al final del array
             await user.save();//guarda los cambios en mongoDB
