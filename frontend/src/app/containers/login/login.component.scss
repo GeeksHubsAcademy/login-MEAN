@@ -1,0 +1,46 @@
+@import '../../../colors.scss';
+.loginContainer{
+    padding: 1.5em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 40vh;
+    h3{
+        text-align: center;
+    }
+    form{
+        padding: 1em;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 35vh;
+        input{
+            all:unset;
+            border-radius: 0.5em;
+            padding: 0.8em;
+            background-color: $AzulPetroleo;
+            &.ng-invalid.ng-dirty{
+                border:2px solid red;
+            }
+            &.ng-valid{
+                border:2px solid green;
+            }
+        }
+        button{
+            all:unset;
+            cursor: pointer;
+            color:$AzulPetroleo;
+            border-radius: 0.5em;
+            text-align: center;
+            padding: 0.8em;
+            background-color: $salmon;
+        }
+    }
+}
+
+::placeholder{
+    font-weight: 300;
+    font-style: italic;
+    color:$salmon;
+}

@@ -1,0 +1,19 @@
+@import '../../../colors.scss';
+
+header{
+    background-color:$AzulPetroleo ;
+    color:$girasol;
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.2em;
+    padding: 0.8em;
+    a{
+        all:unset;
+        cursor: pointer;
+    }
+    .guestZone,.userZone{
+        a{
+            padding: 0.5em;
+        }
+    }
+}

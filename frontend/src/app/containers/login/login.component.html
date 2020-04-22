@@ -1,0 +1,15 @@
+<div class="loginContainer">
+    <h2>Login Form</h2>
+    <form #loginForm="ngForm" (submit)="login(loginForm)">
+        <input type="email" name="email" ngModel
+        email 
+        required
+        placeholder="Introduce your email">
+        <input type="password" 
+        required
+        pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,40}$"
+        name="password" ngModel
+         placeholder="Introduce your password">
+        <button type="submit">Login</button>
+    </form>
+</div>

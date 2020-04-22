@@ -1,0 +1,11 @@
+<header>
+  <a [routerLink]="['/']" routerLinkActive="active">Home</a>
+  <div class="userZone" *ngIf="userService.getUser() as user">
+    <a [routerLink]="['/profile']" routerLinkActive="active">{{user.email}}</a>
+    <a>Logout</a>
+  </div>
+  <div class="guestZone" *ngIf="!userService.getUser()">
+    <a [routerLink]="['/login']" routerLinkActive="active">Login</a>
+    <a [routerLink]="['/signup']" routerLinkActive="active">SignUp</a>
+  </div>
+</header>
