@@ -20,12 +20,10 @@ const UserController = {
             const user = await UserModel.findOne({ //buscamos el usuario por el email, ej: 'user@email.com'
                 email: req.body.email
             });
-            console.log(user)
             if(!user){
                return res.status(400).send({message:'Wrong credentials'});
             }
             const isMatch = await bcrypt.compare(req.body.password,user.password);
-            console.log(isMatch)
             if(!isMatch){
                return res.status(400).send({message:'Wrong credentials'});
             }
