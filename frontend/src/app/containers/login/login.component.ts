@@ -19,16 +19,21 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
   login(loginForm: NgForm) {
-    if (loginForm.valid) {
-      this.userService.login(loginForm.value)
-        .subscribe((res: HttpResponse<object>) => {
-          this.notification.success('Successfully Login', res['message']);
-          localStorage.setItem('authToken', res['token']);
-          this.userService.setUser(res['user']);
-        },
-          (error: HttpErrorResponse) => {
-            console.error(error)
-          })
+    if (!loginForm.valid) {
+      console.log(loginForm)
+      return this.notification.error('Invalid Form', 'There are some wrong fields');
     }
+    this.userService.login(loginForm.value)
+      .subscribe((res: HttpResponse<object>) => {
+        /* tslint:disable:no-string-literal */
+        this.notification.success('Successfully Login', res['message']);
+        localStorage.setItem('authToken', res['token']);
+        this.userService.setUser(res['user']);
+      },
+        (error: HttpErrorResponse) => {
+          console.error(error);
+          
+        this.notification.error('Wrong Login', 'There was a problem trying to log in');
+        });
   }
 }

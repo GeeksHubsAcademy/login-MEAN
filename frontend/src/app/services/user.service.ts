@@ -21,4 +21,11 @@ export class UserService {
   getUser(): User {
     return this.user;
   }
+  getInfo(token): Observable<any> {
+    return this.httpClient.get<User>(environment.API_URL + '/users/info', {
+      headers: {
+        Authorization: token
+      }
+    });
+  }
 }

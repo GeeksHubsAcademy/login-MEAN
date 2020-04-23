@@ -2,10 +2,15 @@ const UserModel = require('../models/User.js');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const UserController = {
+    getAll(req, res) {
+        UserModel.find({})
+            .then(users => res.send(users))
+    },
     async signup(req, res) {
         try {
             const hash = await bcrypt.hash(req.body.password, 9); //generamos hash a partir de la contraseña
             req.body.password = hash; //sobreescribimos la propiedad password con el hash obtenido
+            req.body.role = "user";
             const user = await UserModel.create(req.body); //creamos el usuario a partir del email y el hash suministrados en mongoDB
             res.status(201).send({
                 message: 'User successfully created',
@@ -53,6 +58,9 @@ const UserController = {
                 message: 'There was a problem trying to log in'
             })
         }
+    },
+    getUserInfo(req, res) {
+        res.send(req.user)
     }
 }
 

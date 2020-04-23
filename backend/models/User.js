@@ -11,6 +11,7 @@ const userSchema = new mongoose.Schema({
         required:true,
         minlength:8,
     },
+    role:String,
     tokens:[String],
 });
 const UserModel = mongoose.model('User', userSchema);

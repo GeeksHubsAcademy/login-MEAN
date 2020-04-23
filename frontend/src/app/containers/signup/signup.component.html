@@ -5,12 +5,12 @@
         email 
         required
         placeholder="Introduce your email">
+        <!-- pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,40}$" -->
         <input type="password" 
         required 
-        pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,40}$"
         name="password" ngModel
          placeholder="Introduce your password">
-         <small class="passworError" *ngIf="signupForm.controls.password.errors?.pattern">
+         <small class="passworError" *ngIf="signupForm.controls.password?.errors?.pattern">
              Your password must contain at least a lowercase letter, a uppercase letter, a number, and must be between 8 and 40 characters
          </small>
         <button type="submit">Sign Up</button>

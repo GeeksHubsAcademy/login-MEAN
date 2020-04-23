@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'frontend';
+  ngOnInit() {
+    const token = localStorage.getItem('authToken');
+    console.log(token)
+  }
 }

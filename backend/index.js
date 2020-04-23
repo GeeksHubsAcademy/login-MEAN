@@ -7,7 +7,8 @@ const usersRouter = require('./routes/users.js');
 
 mongoose.connect('mongodb://localhost:27017/loginMEAN', {
         useNewUrlParser: true,
-        useUnifiedTopology: true
+        useUnifiedTopology: true,
+        useCreateIndex:true
     })
     .then(() => console.log('Successfully connected to MongoDB'))
     .catch(console.error);
