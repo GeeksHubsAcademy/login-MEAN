@@ -1,0 +1,8 @@
+<div class="profile" *ngIf="userService.getUser() as user">
+    <div class="email">
+        Email:{{user.email}}
+    </div>
+<div class="role">
+    Role:{{user.role}}
+</div>
+</div>

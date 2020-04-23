@@ -20,7 +20,6 @@ export class LoginComponent implements OnInit {
   }
   login(loginForm: NgForm) {
     if (!loginForm.valid) {
-      console.log(loginForm)
       return this.notification.error('Invalid Form', 'There are some wrong fields');
     }
     this.userService.login(loginForm.value)
@@ -32,8 +31,7 @@ export class LoginComponent implements OnInit {
       },
         (error: HttpErrorResponse) => {
           console.error(error);
-          
-        this.notification.error('Wrong Login', 'There was a problem trying to log in');
+          this.notification.error('Wrong Login', 'There was a problem trying to log in');
         });
   }
 }

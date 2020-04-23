@@ -14,6 +14,8 @@ import { es_ES } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import es from '@angular/common/locales/es';
 import { LoginComponent } from './containers/login/login.component';
+import { HomeComponent } from './containers/home/home.component';
+import { ProfileComponent } from './containers/profile/profile.component';
 
 registerLocaleData(es);
 
@@ -22,7 +24,9 @@ registerLocaleData(es);
     AppComponent,
     HeaderComponent,
     SignupComponent,
-    LoginComponent
+    LoginComponent,
+    HomeComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
