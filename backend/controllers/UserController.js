@@ -61,6 +61,40 @@ const UserController = {
     },
     getUserInfo(req, res) {
         res.send(req.user)
+    },
+    logout(req, res) {
+        UserModel.findByIdAndUpdate(req.user._id, {
+                $pull: {
+                    tokens: req.headers.authorization
+                }
+            }, {
+                new: true
+            }).then(user => res.send(user))
+            .catch(console.error)
+    },
+    async update(req, res) {
+        try {
+            req.body.role = "user";
+            if (req.body.password) {
+                //comparamos que la vieja contraseña corresponde a la de MongoD
+                const isMatch = await bcrypt.compare(req.body.oldPassword, req.user.password);
+                if (!isMatch) return res.status(401).send({ //en caso de no corresponder no actualizamos la contraseña
+                    message: 'Wrong credentials'
+                })
+                req.body.password = await bcrypt.hash(req.body.password, 9);
+            }
+            //findByIdAndUpdate toman el _id como primer argument y actualiza ese documento con los campos que le pasemos en el segundo argumento
+            const user = await UserModel.findByIdAndUpdate("5ea021ae04400436081393bf", req.body, {
+                new: true
+            })
+            res.send(user)
+        } catch (error) {
+            console.error(error);
+            res.status(500).send(error)
+        }
+    },
+    delete(req, res) {
+        // UserModel.findByIdAndDelete()
     }
 }
 
