@@ -4,6 +4,8 @@ const { authentication,isAdmin } = require('../middleware/authentication.js')
 router.post('/signup', UserController.signup);
 router.post('/login', UserController.login);
 router.get('/info', authentication, UserController.getUserInfo);
+router.get('/recover/:email', UserController.recover);
+router.post('/reset', UserController.resetPassword);
 router.put('/', authentication, UserController.update);
 router.get('/logout', authentication, UserController.logout);
 router.get('/', authentication, isAdmin, UserController.getAll);

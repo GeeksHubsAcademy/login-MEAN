@@ -3,7 +3,6 @@ const UserModel = require('../models/User.js');
 const authentication = async (req, res, next) => {
     try {
         const token = req.headers.authorization;
-        console.log(req.headers)
         const payload = jwt.verify(token, 'mimamaMeMima');
         const user = await UserModel.findOne({
             _id: payload._id,

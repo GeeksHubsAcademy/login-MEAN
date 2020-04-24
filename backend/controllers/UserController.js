@@ -1,6 +1,7 @@
 const UserModel = require('../models/User.js');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const transporter = require('../config/nodemailer')
 const UserController = {
     getAll(req, res) {
         UserModel.find({})
@@ -67,14 +68,41 @@ const UserController = {
                 $pull: {
                     tokens: req.headers.authorization
                 }
-            }, {
-                new: true
             }).then(user => res.send(user))
             .catch(console.error)
     },
+    async recover(req, res) {
+        try {
+            const recoverToken = jwt.sign({email:req.params.email},'recoverSecret',{expiresIn:'48h'})
+            const url ="http://localhost:4200/recover/"+recoverToken
+            await transporter.sendMail({
+                to: req.params.email,
+                subject:'Recover your account',
+                html:`
+                <h3>Recover your account</h3>
+                <a href="${url}"></a>
+                This link will expire in 48 hours
+                `
+            })
+            res.send({message:'A recovery email was sent to your email address'})
+        } catch (error) {
+
+        }
+    },
+    async resetPassword(req,res){
+        try {  
+        const recoverToken=req.body.recoverToken;
+        const payload = jwt.verify(recoverToken,'recoverSecret')
+        const hash = await bcrypt.hash(req.body.password);
+        UserModel.findOneAndUpdate({email:payload.email},{password:hash})
+        } catch (error) {
+            console.error(error);
+            res.status(500).send({message:'There was a problem trying to reset the password'})
+        }
+    },
     async update(req, res) {
         try {
-            req.body.role = "user";
+            req.body.role = req.user.role; // sobreescribimos el rol del body de la request por el que hay en la db
             if (req.body.password) {
                 //comparamos que la vieja contraseña corresponde a la de MongoD
                 const isMatch = await bcrypt.compare(req.body.oldPassword, req.user.password);
@@ -84,7 +112,7 @@ const UserController = {
                 req.body.password = await bcrypt.hash(req.body.password, 9);
             }
             //findByIdAndUpdate toman el _id como primer argument y actualiza ese documento con los campos que le pasemos en el segundo argumento
-            const user = await UserModel.findByIdAndUpdate("5ea021ae04400436081393bf", req.body, {
+            const user = await UserModel.findByIdAndUpdate(req.user._id, req.body, {
                 new: true
             })
             res.send(user)

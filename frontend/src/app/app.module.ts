@@ -16,6 +16,7 @@ import es from '@angular/common/locales/es';
 import { LoginComponent } from './containers/login/login.component';
 import { HomeComponent } from './containers/home/home.component';
 import { ProfileComponent } from './containers/profile/profile.component';
+import { RecoverComponent } from './containers/recover/recover.component';
 
 registerLocaleData(es);
 
@@ -26,7 +27,8 @@ registerLocaleData(es);
     SignupComponent,
     LoginComponent,
     HomeComponent,
-    ProfileComponent
+    ProfileComponent,
+    RecoverComponent
   ],
   imports: [
     BrowserModule,

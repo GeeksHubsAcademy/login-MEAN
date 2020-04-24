@@ -15,17 +15,28 @@ export class UserService {
   login(user: User): Observable<any> {
     return this.httpClient.post(environment.API_URL + '/users/login', user);
   }
-  setUser(user: User) {
-    this.user = user;
-  }
-  getUser(): User {
-    return this.user;
-  }
-  getInfo(token): Observable<any> {
+  getInfo(token: string): Observable<any> {
     return this.httpClient.get<User>(environment.API_URL + '/users/info', {
       headers: {
         Authorization: token
       }
     });
+  }
+  logout(token: string): Observable<any> {
+    return this.httpClient.get<User>(environment.API_URL + '/users/logout', {
+      headers: {
+        Authorization: token
+      }
+    });
+  }
+  resetPassword(password,recoverToken) {
+    return this.httpClient.post(environment.API_URL + '/users/resetPassword', {recoverToken, password });
+
+  }
+  setUser(user: User) {
+    this.user = user;
+  }
+  getUser(): User {
+    return this.user;
   }
 }
