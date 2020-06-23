@@ -1,4 +1,5 @@
 # Login MEAN
 
-
-<img src="https://lh3.googleusercontent.com/ZNJ2xUkDjnDTvvwUvEFkTK2vFNvJGlqRbn-7tO0lI6aOni6vkegcv8mlI6VORZ-KP1tblVOtnSHqJrhlJEx2=w1332-h958-rw">
+<p align="center">
+    <img src="https://github.com/GeeksHubsAcademy/2020-geekshubs-media/blob/master/image/logo.png" >	
+</p>
